@@ -1,7 +1,5 @@
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Point;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import static java.lang.Thread.sleep;
@@ -27,15 +25,15 @@ public class DIUMouseTrail extends javax.swing.JFrame {
     public DIUMouseTrail() {
         initComponents();
         this.trail = new MouseTrail(panelToPaint.getGraphics());
-        timer = new Timer(500, new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                trail.update();
-                panelToPaint.paint(panelToPaint.getGraphics());
-                trail.paint();
-            }
+        timer = new Timer(500, e -> {
+            Point location = MouseInfo.getPointerInfo().getLocation();
+            Point locationOnScreen = panelToPaint.getLocationOnScreen();
+            location.translate(-locationOnScreen.x,- locationOnScreen.y);
+            trail.add(location);
+            panelToPaint.paint(panelToPaint.getGraphics());
+            trail.paint();
         });
+        this.setResizable(false);
     }
 
     /**

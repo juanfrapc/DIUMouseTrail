@@ -12,8 +12,8 @@ public class MouseTrail {
     private final Graphics graphics;
     private int shape = 0;
 
-    public MouseTrail(Graphics g) {
-        this.trail = new ArrayList();
+    MouseTrail(Graphics g) {
+        this.trail = new ArrayList<>();
         this.graphics = g;
     }
 
